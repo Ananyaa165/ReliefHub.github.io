@@ -1,34 +1,27 @@
 from django.shortcuts import render
-from complaints.models import Complaints
+from public_reg.models import PublicReg
+from login.models import Login
 # Create your views here.
-def complaints(request):
-    ss=request.session["u_id"]
+def public_reg(request):
+    txt=""
     if request.method=="POST":
-        obj=Complaints()
-        obj.volunteer_id=ss
-        obj.complaint = request.POST.get('complaints')
-        obj.reply='pending'
+        obj=PublicReg()
+        obj.name=request.POST.get('name')
+        obj.address=request.POST.get('address')
+        obj.phone_no=request.POST.get('phone_no')
+        obj.user_name=request.POST.get('username')
+        obj.password=request.POST.get('password')
+        obj.email=request.POST.get('email')
         obj.save()
-    return render(request,'complaints/complaints.html')
 
-def complaints_reply(request,idd):
-    if request.method=="POST":
-        obj=Complaints.objects.get(complaint_id=idd)
-        obj.reply=request.POST.get('reply')
-        obj.save()
-        return complaints_admin(request)
-    return render(request, 'complaints/reply.html')
-
-def complaints_admin(request):
-    obj=Complaints.objects.all()
-    context={
-        'o':obj
-    }
-    return render(request, 'complaints/view_complaint_adm.html',context)
-def complaints_view(request):
-    ss=request.session["u_id"]
-    obj=Complaints.objects.filter(volunteer_id=ss)
-    context={
-        'o':obj
-    }
-    return render(request, 'complaints/view_reply.html',context)
+        ob = Login()
+        ob.username = obj.user_name
+        ob.password = obj.password
+        ob.type = "public"
+        ob.u_id = obj.public_id
+        ob.save()
+        txt="Registered SuccessFully"
+    context = {
+            'msg': txt
+        }
+    return render(request,'public_reg/public_reg.html',context)

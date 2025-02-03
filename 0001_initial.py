@@ -12,17 +12,17 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Delivery',
+            name='PublicReg',
             fields=[
-                ('delivery_id', models.AutoField(primary_key=True, serialize=False)),
+                ('public_id', models.AutoField(primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=45)),
                 ('phone_no', models.CharField(max_length=45)),
-                ('item', models.CharField(max_length=100)),
-                ('quantity', models.CharField(max_length=45)),
-                ('public_location', models.CharField(max_length=200)),
-                ('status', models.CharField(max_length=45)),
+                ('address', models.CharField(max_length=200)),
+                ('user_name', models.CharField(max_length=45)),
+                ('password', models.CharField(max_length=45)),
             ],
             options={
-                'db_table': 'delivery',
+                'db_table': 'public_reg',
                 'managed': False,
             },
         ),
