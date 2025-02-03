@@ -1,17 +1,24 @@
 from django.db import models
-from volunteer_reg.models import VolunteerReg
-# from camp_details.models import CampDetails
+from camp_details.models import CampDetails
 # Create your models here.
-class Scheduling(models.Model):
-    task_id = models.AutoField(primary_key=True)
-    # volunteer_id = models.IntegerField(blank=True, null=True)
-    volunteer = models.ForeignKey(VolunteerReg, on_delete=models.CASCADE)
-    scheduled_task = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField()
+class VolunteerReg(models.Model):
+    volunteer_id = models.AutoField(primary_key=True)
+    volunteer_name = models.CharField(max_length=45)
+    volunteer_ph = models.CharField(max_length=45)
+    email_id = models.CharField(max_length=100)
+    skill = models.CharField(max_length=100)
+    availability = models.CharField(max_length=45)
+    designation = models.CharField(max_length=45)
+    gender = models.CharField(max_length=45)
+    age = models.IntegerField()
+    address = models.CharField(max_length=200)
+    user_name = models.CharField(max_length=45)
+    password = models.CharField(max_length=45)
+    status = models.CharField(max_length=45)
+    document = models.CharField(max_length=500)
     # camp_id = models.IntegerField()
-    # camp_details=models.ForeignKey(CampDetails,on_delete=models.CASCADE)
+    camp=models.ForeignKey(CampDetails,on_delete=models.CASCADE)
+
     class Meta:
         managed = False
-        db_table = 'scheduling'
-
-
+        db_table = 'volunteer_reg'

@@ -12,14 +12,25 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Scheduling',
+            name='VolunteerReg',
             fields=[
-                ('task_id', models.AutoField(primary_key=True, serialize=False)),
-                ('scheduled_task', models.CharField(blank=True, max_length=100, null=True)),
-                ('date', models.DateField()),
+                ('volunteer_id', models.AutoField(primary_key=True, serialize=False)),
+                ('volunteer_name', models.CharField(max_length=45)),
+                ('volunteer_ph', models.CharField(max_length=45)),
+                ('email_id', models.CharField(max_length=100)),
+                ('skill', models.CharField(max_length=100)),
+                ('availability', models.CharField(max_length=45)),
+                ('designation', models.CharField(max_length=45)),
+                ('gender', models.CharField(max_length=45)),
+                ('age', models.IntegerField()),
+                ('address', models.CharField(max_length=200)),
+                ('user_name', models.CharField(max_length=45)),
+                ('password', models.CharField(max_length=45)),
+                ('status', models.CharField(max_length=45)),
+                ('document', models.CharField(max_length=500)),
             ],
             options={
-                'db_table': 'scheduling',
+                'db_table': 'volunteer_reg',
                 'managed': False,
             },
         ),

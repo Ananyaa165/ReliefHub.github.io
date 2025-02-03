@@ -1,10 +1,8 @@
 from django.conf.urls import url
-from scheduling import views
-
+from volunteer_reg import views
 urlpatterns=[
-    url('schedulng/(?P<idd>\w+)',views.scheduling),
-    url('scheduling_activities/',views.scheduling_activities),
-    url('view_scheduling/',views.scheduling_view),
-    url('view_admin/',views.admin_task_view),
-    url('delete/(?P<idd>\w+)', views.delete),
+    url('mng_volunteer/', views.mng_volunteer),
+    url('volunteer_reg/', views.volunteer_reg),
+    url('approve/(?P<idd>\w+)',views.approve),
+    url('rejected/(?P<idd>\w+)',views.rejected),
 ]

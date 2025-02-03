@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SchedulingConfig(AppConfig):
+class VolunteerRegConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'scheduling'
+    name = 'volunteer_reg'
