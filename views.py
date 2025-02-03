@@ -1,27 +1,41 @@
 from django.shortcuts import render
-from public_reg.models import PublicReg
-from login.models import Login
+from scheduling.models import Scheduling
+from  camp_details.models import  CampDetails
+from volunteer_reg.models import VolunteerReg
 # Create your views here.
-def public_reg(request):
-    txt=""
+def scheduling(request,idd):
+    ss=request.session["u_id"]
     if request.method=="POST":
-        obj=PublicReg()
-        obj.name=request.POST.get('name')
-        obj.address=request.POST.get('address')
-        obj.phone_no=request.POST.get('phone_no')
-        obj.user_name=request.POST.get('username')
-        obj.password=request.POST.get('password')
-        obj.email=request.POST.get('email')
+        obj=Scheduling()
+        obj.scheduled_task=request.POST.get('activity')
+        obj.volunteer_id=idd
+        obj.date=request.POST.get('date')
         obj.save()
+        return scheduling_activities(request)
+    return render(request,'scheduling/scheduling_admin.html')
 
-        ob = Login()
-        ob.username = obj.user_name
-        ob.password = obj.password
-        ob.type = "public"
-        ob.u_id = obj.public_id
-        ob.save()
-        txt="Registered SuccessFully"
-    context = {
-            'msg': txt
-        }
-    return render(request,'public_reg/public_reg.html',context)
+def scheduling_activities(request):
+    obj=VolunteerReg.objects.all()
+    context={
+        'o':obj
+    }
+    return render(request,'scheduling/scheduling_volunteer_activities.html',context)
+def scheduling_view(request):
+    ss = request.session["u_id"]
+    obj = Scheduling.objects.filter(volunteer_id=ss)
+    context={
+        'o':obj
+    }
+    return render(request,'scheduling/view_volunteer_scheduling.html',context)
+
+def admin_task_view(request):
+    obj=Scheduling.objects.all()
+    context={
+        'o':obj
+    }
+    return render(request,'scheduling/admin_task_view.html',context)
+
+def delete(request,idd):
+    obj=Scheduling(task_id=idd)
+    obj.delete()
+    return admin_task_view(request)

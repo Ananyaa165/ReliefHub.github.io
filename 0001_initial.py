@@ -12,17 +12,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='PublicReg',
+            name='Scheduling',
             fields=[
-                ('public_id', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=45)),
-                ('phone_no', models.CharField(max_length=45)),
-                ('address', models.CharField(max_length=200)),
-                ('user_name', models.CharField(max_length=45)),
-                ('password', models.CharField(max_length=45)),
+                ('task_id', models.AutoField(primary_key=True, serialize=False)),
+                ('scheduled_task', models.CharField(blank=True, max_length=100, null=True)),
+                ('date', models.DateField()),
             ],
             options={
-                'db_table': 'public_reg',
+                'db_table': 'scheduling',
                 'managed': False,
             },
         ),
